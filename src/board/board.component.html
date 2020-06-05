@@ -1,0 +1,10 @@
+<div class="board">
+    <div class="cubeBox" ng-repeat="(index, bro) in $ctrl.board.getBoardToDraw()">
+        <cube ng-click="$ctrl.openCube(bro, $ctrl.board, index)" state="bro.getState()" cube="bro"></cube>
+    </div>
+</div>
+
+<!--
+
+
+-->

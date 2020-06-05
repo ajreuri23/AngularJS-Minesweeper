@@ -1,0 +1,21 @@
+@import './cube';
+@import './board';
+@import './resets';
+@import './navbar';
+
+body, html {
+  padding:0;
+  margin:0;
+}
+
+$primary-color: white;
+$bg: black;
+h1 {
+  color: $primary-color;
+  background-color: $bg;
+}
+
+
+
+
+

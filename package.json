@@ -1,0 +1,33 @@
+{
+  "name": "minesweeper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "clean": "rm dist/bundle.js",
+    "build-dev": "webpack -d --mode development",
+    "build-prod": "webpack -p --mode production"
+  },
+  "dependencies": {
+    "@types/angular": "^1.7.0",
+    "angular": "^1.7.9",
+    "bootstrap": "^4.5.0",
+    "jquery": "^3.5.1"
+  },
+  "devDependencies": {
+    "angular-right-click": "^0.1.1",
+    "awesome-typescript-loader": "^5.2.1",
+    "css-loader": "^3.5.3",
+    "node-sass": "^4.14.1",
+    "popper.js": "^1.16.1",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.2.1",
+    "typescript": "^3.9.3",
+    "url-loader": "^4.1.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  }
+}
