@@ -1,0 +1,10 @@
+<div class="cubeGrid">
+    <img ng-if="!$ctrl.cube.isOpened() && !$ctrl.cube.isFlagged()" src="../../assets/facingDown.png" alt="">
+    <img ng-if="$ctrl.cube.isOpened() || $ctrl.cube.isFlagged()" src="{{$ctrl.cube.getImage()}}" alt=""> 
+</div>
+
+
+<!---
+
+ng-click="$ctrl.openCube()"
+-->

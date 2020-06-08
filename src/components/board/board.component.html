@@ -1,0 +1,8 @@
+<p>Flagged Cubes: {{$ctrl.board.getFlaggedCubes()}}</p>
+<div ng-class="{'board10' : $ctrl.boardSize == 10, 'board16' : $ctrl.boardSize == 16, 'board24' : $ctrl.boardSize == 24}" class="board">
+    <div class="cubeBox" ng-repeat="(index, cube) in $ctrl.board.getBoardToDraw()">
+        <cube ng-click="$ctrl.openCube(cube, $ctrl.board, index)" ng-right-click="$ctrl.setFlag(cube, $ctrl.board, index)" cube="cube"></cube>
+    </div>
+</div>
+
+<message ng-if="$ctrl.board.isGameEnded()" message="$ctrl.board.getGameMessage()" play-again="$ctrl.startGame()"></message>

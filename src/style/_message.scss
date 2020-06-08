@@ -1,0 +1,26 @@
+.message {
+    position:absolute;
+    width:20%;
+    height: 15%;
+    left:40%;
+    top:42.5%;
+    background-color:white;
+
+    p {
+        font-size:24px;
+        margin-left:auto;
+        text-align:center;
+    }
+
+    button {
+        margin-left: auto;
+        background-color: black;
+        color:White;
+        border-radius:4px;
+        border:none;
+    }
+
+    button:hover {
+        background-color:gray;
+    }
+}
