@@ -1,18 +1,27 @@
-export class navbarController implements ng.IComponentController {
-    public gameDifficulties: Array<[string, number]>;
-    public selectedDifficulty: number;
-    static $inject: string[] = ["$element"];
+import { Difficulties } from '../../models/Difficulties';
 
-    constructor(public size: number) {
+export class navbarController implements ng.IComponentController {
+    public gameDifficulties: Array<Object>;
+    public selectedDifficulty: number;
+    public size: number;
+
+    constructor() {
     }
 
     $onInit() {
-        this.selectedDifficulty = 10;
-        this.gameDifficulties = new Array<[string, number]>();
-        this.gameDifficulties.push(["Easy", 10]);
-        this.gameDifficulties.push(["Medium", 16]);
-        this.gameDifficulties.push(["Hard", 24]);
-    }
+        this.selectedDifficulty = Difficulties.Easy;
+        this.gameDifficulties = [{
+            title: 'Easy',
+            size: Difficulties.Easy
+        }, {
+            title: 'Medium',
+            size: Difficulties.Medium
+        }, {
+            title: 'Hard',
+            size: Difficulties.Hard
+        }]
+
+    };
 
     somethingChanged() {
         this.size = this.selectedDifficulty;

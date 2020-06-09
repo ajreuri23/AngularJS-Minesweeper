@@ -1,22 +1,16 @@
 export class messageController implements ng.IComponentController {
+    public message: string;
+    public playAgain: Function;
 
-    static $inject: string[] = ["$element"];
-
-    constructor(private message: string, private playAgain: Function) {
+    constructor() {
     }
 }
 
 export class messageComponent implements ng.IComponentOptions {
-    public templateUrl: string;
-    public bindings: any;
-    public controller: any;
-
-    public constructor() {
-        this.templateUrl = '../src/components/message/message.component.html';
-        this.bindings = {
-            message: '<',
-            playAgain: '&'
-        }
-        this.controller = messageController;
-    }
+    public templateUrl: string = '../src/components/message/message.component.html';
+    public bindings = {
+        message: '<',
+        playAgain: '&'
+    };
+    public controller: any = messageController;
 }

@@ -1,16 +1,14 @@
 import { Board } from './board';
 import { Cube } from '../cube/cube';
 import { mineSweeperService } from '../../services/gameService';
-import {sizeToMines} from '../../models/sizeToMines';
 
 class boardController implements ng.IComponentController {
     public board: Board;
     public boardSize: number;
-
-    static $inject: string[] = ["$element"];
-
-    constructor(private size: any) {
-        this.boardSize = size;
+    public size: any;
+    
+    constructor() {
+        this.boardSize = this.size;
     }
 
     $doCheck() {
@@ -21,7 +19,7 @@ class boardController implements ng.IComponentController {
     }
 
     startGame() {
-        this.board = new Board(this.size, sizeToMines.get(this.size.toString()));
+        this.board = new Board(this.size);
         this.board = mineSweeperService.initializeBoard(this.board);
     }
 
@@ -30,8 +28,7 @@ class boardController implements ng.IComponentController {
     }
 
     openCube(cube: Cube, board: Board, index: number) {
-        cube = mineSweeperService.openCube(cube, board, index);
-        this.board.assignCubeInPosition(cube, Math.floor(index / this.board.getBoardSize()), index % this.board.getBoardSize());
+        mineSweeperService.openCube(cube, board, index);
     }
 
     setFlag(cube: Cube, board: Board, index: number) {

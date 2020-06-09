@@ -1,47 +1,51 @@
 import {Cube} from '../cube/cube';
+import {sizeToMines} from '../../models/sizeToMines';
+import {gameStates} from '../../models/gameStates';
 
 export class Board {
-    private board: Cube[][];
+    private cells: Cube[][];
     private boardSize: number;
-    private minesLeft: number;
     private amountOfMines: number;
+    private minesLeft: number;
     private flaggedCells: number;
     private openedCells: number;
-    private gameEnded: boolean;
-    private gameMessage: string;
+    private gameState: gameStates;
 
-    constructor(size: number, mines: number) {
+    constructor(size: number) {
+        this.cells = [];
         this.boardSize = size;
-        this.amountOfMines = mines;
-        this.board = [];
-        this.minesLeft = mines;
+        this.amountOfMines = sizeToMines.get(size.toString());
+        this.minesLeft = this.amountOfMines;
+        this.flaggedCells = this.amountOfMines;
         this.openedCells = 0;
-        this.flaggedCells = mines;
-        this.gameEnded = false;
+        this.gameState =gameStates.Running;
 
-        for(let row = 0; row < size; row++) {
-            this.board[row] = [];
-            for(let column = 0; column < size; column++) {
-                this.board[row][column] = new Cube("facingDown"); 
+        this.initializeCells();        
+    }
+
+    initializeCells() {
+        for(let row = 0; row < this.boardSize; row++) {
+            this.cells[row] = [];
+            for(let column = 0; column < this.boardSize; column++) {
+                this.cells[row][column] = new Cube("facingDown"); 
             }
         }
+    }
+
+    getGameState() {
+        return this.gameState;
     }
 
     getAmountOfMines() {
         return this.amountOfMines;
     }
 
-    getGameMessage() {
-        return this.gameMessage;
-    }
-
     isGameEnded() {
-        return this.gameEnded;
+        return this.gameState !== gameStates.Running;
     }
 
-    endGame(message: string) {
-        this.gameMessage = message;
-        this.gameEnded = true;
+    endGame(state: gameStates) {
+        this.gameState = state;
     }
 
     getOpenedCubes() {
@@ -77,22 +81,18 @@ export class Board {
     }
 
     getBoard(): Cube[][] {
-        return this.board;
+        return this.cells;
     }
 
     getBoardToDraw(): Array<Cube> {
         let boardInArrayFormat: Array<Cube> = new Array<Cube>();
         for(let row = 0; row < this.boardSize; row++) {
             for(let column = 0; column < this.boardSize; column++) {
-                boardInArrayFormat.push(this.board[row][column]);
+                boardInArrayFormat.push(this.cells[row][column]);
             }
         }
 
         return boardInArrayFormat;
-    }
-
-    assignCubeInPosition(cube:Cube, row:number, column:number) {
-        this.board[row][column] = cube;
     }
 
     getBoardSize() {

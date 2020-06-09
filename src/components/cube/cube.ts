@@ -1,3 +1,4 @@
+import {States} from '../../models/States';
 import {stateToImage} from '../../models/imageToState';
 
 export class Cube {

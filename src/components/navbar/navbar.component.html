@@ -6,7 +6,7 @@
       </div>
  
       <select ng-model="$ctrl.selectedDifficulty"  name="" id="" >
-        <option ng-repeat="difficulty in $ctrl.gameDifficulties" value="{{difficulty[1]}}">{{difficulty[0]}}</option>
+        <option ng-repeat="difficulty in $ctrl.gameDifficulties" value="{{difficulty.size}}">{{difficulty.title}}</option>
       </select>
       <button ng-click="$ctrl.somethingChanged()">PLAY</button>
     </div>

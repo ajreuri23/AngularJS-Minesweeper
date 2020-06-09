@@ -1,6 +1,6 @@
 import { Cube } from '../components/cube/cube';
+import {gameStates} from  '../models/gameStates';
 import { Board } from '../components/board/board';
-import { sizeToMines } from '../models/sizeToMines';
 
 export class mineSweeperService {
     static initializeBoard(board: Board): Board {
@@ -77,7 +77,7 @@ export class mineSweeperService {
     }
 
     static setMines(board: Board): Board {
-        let amountOfMines: number = sizeToMines.get(board.getBoardSize().toString());
+        let amountOfMines: number = board.getAmountOfMines();
         let boardSize: number = board.getBoardSize();
         let minePlaced: boolean;
 
@@ -129,9 +129,9 @@ export class mineSweeperService {
         }
 
         if (isWon) {
-            board.endGame("YOU WON MY MAN");
+            board.endGame(gameStates.Won);
         } else {
-            board.endGame("YOU LOST MY BRO");
+            board.endGame(gameStates.Lost);
         }
 
     }
