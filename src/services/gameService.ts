@@ -1,6 +1,6 @@
 import { Cube } from '../components/cube/cube';
 import { Board } from '../components/board/board';
-import {sizeToMines} from '../models/sizeToMines';
+import { sizeToMines } from '../models/sizeToMines';
 
 export class mineSweeperService {
     static initializeBoard(board: Board): Board {
@@ -88,6 +88,8 @@ export class mineSweeperService {
 
             while (!minePlaced) {
                 minePlaced = board.getBoard()[randomRow][randomColumn].setMine();
+                randomRow = Math.floor(Math.random() * boardSize);
+                randomColumn = Math.floor(Math.random() * boardSize);
             }
         }
 
