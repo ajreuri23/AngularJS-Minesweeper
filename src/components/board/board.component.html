@@ -1,7 +1,10 @@
 <p>Flagged Cubes: {{$ctrl.board.getFlaggedCubes()}}</p>
-<div ng-class="{'board10' : $ctrl.boardSize == 10, 'board16' : $ctrl.boardSize == 16, 'board24' : $ctrl.boardSize == 24}" class="board">
-    <div class="cubeBox" ng-repeat="(index, cube) in $ctrl.board.getBoardToDraw()">
-        <cube ng-click="$ctrl.openCube(cube, $ctrl.board, index)" ng-right-click="$ctrl.setFlag(cube, $ctrl.board, index)" cube="cube"></cube>
+<div class="board">
+    <div class="cubeRow" ng-repeat="row in $ctrl.getSize() track by $index">
+        <div class="cubeCell" ng-repeat="column in $ctrl.getSize() track by $index">
+            <cube ng-click="$ctrl.openCube($parent.$index, $index)"
+                ng-right-click="$ctrl.setFlag($parent.$index, $index)" cube="$ctrl.board.getCells()[$parent.$index][$index]"></cube>
+        </div>
     </div>
 </div>
 

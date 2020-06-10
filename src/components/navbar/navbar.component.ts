@@ -1,36 +1,29 @@
 import { Difficulties } from '../../models/Difficulties';
 
+const difficulties = [{
+    title: 'Easy',
+    size: Difficulties.Easy
+}, {
+    title: 'Medium',
+    size: Difficulties.Medium
+}, {
+    title: 'Hard',
+    size: Difficulties.Hard
+}];
+
 export class navbarController implements ng.IComponentController {
-    public gameDifficulties: Array<Object>;
-    public selectedDifficulty: number;
-    public size: number;
+    public gameDifficulties: Array<Object> = difficulties;;
+    public selectedDifficulty: any = this.gameDifficulties[0];
+    public update: Function;
 
-    constructor() {
-    }
-
-    $onInit() {
-        this.selectedDifficulty = Difficulties.Easy;
-        this.gameDifficulties = [{
-            title: 'Easy',
-            size: Difficulties.Easy
-        }, {
-            title: 'Medium',
-            size: Difficulties.Medium
-        }, {
-            title: 'Hard',
-            size: Difficulties.Hard
-        }]
-
-    };
-
-    somethingChanged() {
-        this.size = this.selectedDifficulty;
+    getSelectedDifficulty() {
+        return parseInt(this.selectedDifficulty);
     }
 }
 
 export class navbarComponent implements ng.IComponentOptions {
     public bindings = {
-        size: '=',
+        update: '&'
     };
     public controller = navbarController;
     public templateUrl = '../src/components/navbar/navbar.component.html';

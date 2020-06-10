@@ -5,10 +5,10 @@
         HAFIFA
       </div>
  
-      <select ng-model="$ctrl.selectedDifficulty"  name="" id="" >
-        <option ng-repeat="difficulty in $ctrl.gameDifficulties" value="{{difficulty.size}}">{{difficulty.title}}</option>
+      <select type="number" ng-model="$ctrl.selectedDifficulty">
+        <option ng-repeat="difficulty in $ctrl.gameDifficulties" ng-selected="difficulty == $ctrl.selectedDifficulty" value={{difficulty.size}}>{{difficulty.title}}</option>
       </select>
-      <button ng-click="$ctrl.somethingChanged()">PLAY</button>
+      <button ng-click="$ctrl.update({size: $ctrl.getSelectedDifficulty()})">PLAY</button>
     </div>
   </div>
 

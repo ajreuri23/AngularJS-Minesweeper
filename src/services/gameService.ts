@@ -1,9 +1,12 @@
 import { Cube } from '../components/cube/cube';
-import {gameStates} from  '../models/gameStates';
+import { gameStates } from '../models/gameStates';
 import { Board } from '../components/board/board';
+import { cubeStates } from '../models/States';
+import { adjacentMinesToState } from '../models/adjacentMinesToState';
 
-export class mineSweeperService {
-    static initializeBoard(board: Board): Board {
+export class gameService {
+    static initializeBoard(size:number): Board {
+        let board = new Board(size);
         board = this.setMines(board);
         board = this.assignAdjacentMines(board);
 
@@ -15,11 +18,11 @@ export class mineSweeperService {
 
         for (let row = 0; row < board.getBoardSize(); row++) {
             for (let column = 0; column < board.getBoardSize(); column++) {
-                if (!board.getBoard()[row][column].isBomb()) {
+                if (!board.getCells()[row][column].isBomb()) {
                     amountOfMines = this.getAdjacentMines(board, row, column);
 
-                    board.getBoard()[row][column].changeState(amountOfMines.toString());
-                    board.getBoard()[row][column].setAdjacentMines(amountOfMines);
+                    board.getCells()[row][column].changeState(adjacentMinesToState.get(amountOfMines));
+                    board.getCells()[row][column].setAdjacentMines(amountOfMines);
                 }
             }
         }
@@ -32,7 +35,7 @@ export class mineSweeperService {
         let possibilites: Array<[number, number]> = this.getPossibleNeighborsForCube(board, row, column);
 
         possibilites.forEach(possibility => {
-            if (board.getBoard()[possibility[0]][possibility[1]].isBomb()) amountOfMines++;
+            if (board.getCells()[possibility[0]][possibility[1]].isBomb()) amountOfMines++;
         })
 
         return amountOfMines;
@@ -87,7 +90,7 @@ export class mineSweeperService {
             let randomColumn: number = Math.floor(Math.random() * boardSize);
 
             while (!minePlaced) {
-                minePlaced = board.getBoard()[randomRow][randomColumn].setMine();
+                minePlaced = board.getCells()[randomRow][randomColumn].setMine();
                 randomRow = Math.floor(Math.random() * boardSize);
                 randomColumn = Math.floor(Math.random() * boardSize);
             }
@@ -96,24 +99,21 @@ export class mineSweeperService {
         return board;
     }
 
-    static openCube(cube: Cube, board: Board, index: number) {
-        if (cube.isOpened()) { return cube; }
-        if (cube.getState() === 'flag') { board.unflaggedCube(); }
+    static openCube(cube: Cube, board: Board, row: number, column: number) {
+        if (cube.isOpen()) { return cube; }
+        if (cube.getState() === cubeStates.flag) { board.increaseFlaggedCubesAmount(); }
         if (cube.isBomb()) { this.endGame(board, false) }
 
-        let row = Math.floor(index / board.getBoardSize());
-        let column = index % board.getBoardSize();
-
         cube.open();
-        board.openedCube();
+        board.increaseOpenedCubeAmount();
 
         if (!this.checkAllCellsOpened(board)) {
-            if (cube.getState() === '0') {
+            if (cube.getState() === cubeStates.zero) {
                 let possibilites = this.getPossibleNeighborsForCube(board, row, column);
 
                 possibilites.forEach(possibility => {
-                    let cubeToOpen = board.getBoard()[possibility[0]][possibility[1]];
-                    this.openCube(cubeToOpen, board, (possibility[0] * board.getBoardSize()) + possibility[1]);
+                    let cubeToOpen = board.getCells()[possibility[0]][possibility[1]];
+                    this.openCube(cubeToOpen, board, possibility[0], possibility[1]);
                 })
             }
         }
@@ -124,7 +124,7 @@ export class mineSweeperService {
     static endGame(board: Board, isWon: boolean) {
         for (let row = 0; row < board.getBoardSize(); row++) {
             for (let column = 0; column < board.getBoardSize(); column++) {
-                board.getBoard()[row][column].open();
+                board.getCells()[row][column].open();
             }
         }
 

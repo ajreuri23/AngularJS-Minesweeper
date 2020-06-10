@@ -1,9 +1,6 @@
 export class messageController implements ng.IComponentController {
     public message: string;
     public playAgain: Function;
-
-    constructor() {
-    }
 }
 
 export class messageComponent implements ng.IComponentOptions {

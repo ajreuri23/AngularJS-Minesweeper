@@ -1,20 +1,14 @@
+import {Difficulties} from '../../models/Difficulties';
+
 export class appController implements ng.IComponentController {
     public boardSize: number;
-    public mineAmount: number;
-    public renderApp: boolean = false;
-
-    constructor() {
-    }
 
     $onInit() {
-        this.boardSize = 10;
-        this.mineAmount = 10;
-        this.renderApp = true;
+        this.boardSize = Difficulties.Easy;
     }
 
-    $onChanges() {
-        this.renderApp = false;
-        this.renderApp = true;
+    updateSize(size: number) {
+        this.boardSize = size;
     }
 }
 

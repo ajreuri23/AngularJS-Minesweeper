@@ -1,6 +1,7 @@
-import {Cube} from '../cube/cube';
-import {sizeToMines} from '../../models/sizeToMines';
-import {gameStates} from '../../models/gameStates';
+import { Cube } from '../cube/cube';
+import { sizeToMines } from '../../models/sizeToMines';
+import { gameStates } from '../../models/gameStates';
+import { cubeStates } from '../../models/States';
 
 export class Board {
     private cells: Cube[][];
@@ -18,16 +19,16 @@ export class Board {
         this.minesLeft = this.amountOfMines;
         this.flaggedCells = this.amountOfMines;
         this.openedCells = 0;
-        this.gameState =gameStates.Running;
+        this.gameState = gameStates.Running;
 
-        this.initializeCells();        
+        this.initializeCells();
     }
 
     initializeCells() {
-        for(let row = 0; row < this.boardSize; row++) {
+        for (let row = 0; row < this.boardSize; row++) {
             this.cells[row] = [];
-            for(let column = 0; column < this.boardSize; column++) {
-                this.cells[row][column] = new Cube("facingDown"); 
+            for (let column = 0; column < this.boardSize; column++) {
+                this.cells[row][column] = new Cube(cubeStates.facingDown);
             }
         }
     }
@@ -40,6 +41,22 @@ export class Board {
         return this.amountOfMines;
     }
 
+    getOpenedCubes() {
+        return this.openedCells;
+    }
+
+    getBoardSize(): number {
+        return this.boardSize;
+    }
+
+    getFlaggedCubes() {
+        return this.flaggedCells;
+    }
+
+    getMinesLeft() {
+        return this.minesLeft;
+    }
+
     isGameEnded() {
         return this.gameState !== gameStates.Running;
     }
@@ -48,54 +65,27 @@ export class Board {
         this.gameState = state;
     }
 
-    getOpenedCubes() {
-        return this.openedCells;
-    }
-
-    getFlaggedCubes() {
-        return this.flaggedCells;
-    }
-
-    openedCube() {
-        this.openedCells++;
-    }
-
-    flaggedCube() {
-        this.flaggedCells--;
-    }
-
-    unflaggedCube() {
-        this.flaggedCells++;
-    }
-
-    flaggedMine() {
-        this.minesLeft--;
-    }
-
-    unflaggedMine() {
-        this.minesLeft++;
-    }
-
-    getMinesLeft() {
-        return this.minesLeft;
-    }
-
-    getBoard(): Cube[][] {
+    getCells(): Cube[][] {
         return this.cells;
     }
 
-    getBoardToDraw(): Array<Cube> {
-        let boardInArrayFormat: Array<Cube> = new Array<Cube>();
-        for(let row = 0; row < this.boardSize; row++) {
-            for(let column = 0; column < this.boardSize; column++) {
-                boardInArrayFormat.push(this.cells[row][column]);
-            }
-        }
-
-        return boardInArrayFormat;
+    increaseOpenedCubeAmount() {
+        this.openedCells++;
     }
 
-    getBoardSize() {
-        return this.boardSize;
+    decreaseFlaggedCubesAmount() {
+        this.flaggedCells--;
+    }
+
+    increaseFlaggedCubesAmount() {
+        this.flaggedCells++;
+    }
+
+    decreaseMinesLeftAmount() {
+        this.minesLeft--;
+    }
+
+    increaseMinesLeftAmount() {
+        this.minesLeft++;
     }
 }

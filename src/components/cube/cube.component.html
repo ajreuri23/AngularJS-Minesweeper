@@ -1,6 +1,6 @@
 <div class="cubeGrid">
-    <img ng-if="!$ctrl.cube.isOpened() && !$ctrl.cube.isFlagged()" src="../../assets/facingDown.png" alt="">
-    <img ng-if="$ctrl.cube.isOpened() || $ctrl.cube.isFlagged()" src="{{$ctrl.cube.getImage()}}" alt=""> 
+    <img ng-if="!$ctrl.cube.isOpen() && !$ctrl.cube.isFlag()" src="../../assets/facingDown.png" alt="">
+    <img ng-if="$ctrl.cube.isOpen() || $ctrl.cube.isFlag()" src="{{$ctrl.getImage()}}" alt=""> 
 </div>
 
 

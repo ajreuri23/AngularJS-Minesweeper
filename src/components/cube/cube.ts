@@ -1,36 +1,27 @@
-import {States} from '../../models/States';
+import {cubeStates} from '../../models/States';
 import {stateToImage} from '../../models/imageToState';
+import { adjacentMinesToState } from '../../models/adjacentMinesToState';
 
 export class Cube {
-    private image: string;
-    private state: string;
+    private state: cubeStates;
     private opened: boolean;
     private isMine: boolean;
     private adjacentMines: number;
 
-    constructor(state: string) {
-        this.image = stateToImage.get(state);
+    constructor(state: cubeStates) {
         this.state = state;
         this.isMine = false;
         this.opened = false;
         this.adjacentMines = 0;
     }
 
-    getImage(): string {
-        return this.image;
-    }
-
-    getImageByState(state: string): string {
-        return stateToImage.get(state);
-    }
-
-    getState(): string {
+    getState(): cubeStates {
         return this.state;
     }
 
     setMine(): boolean {
-        if (this.state === "facingDown") {
-            this.changeState("bomb");
+        if (this.state === cubeStates.facingDown) {
+            this.changeState(cubeStates.bomb);
             this.isMine = true;
             return true;
         }
@@ -41,10 +32,10 @@ export class Cube {
     setFlag(): boolean {
         if (this.opened) { return false; }
 
-        if (this.isFlagged()) {
-            this.changeState(this.adjacentMines.toString());
+        if (this.isFlag()) {
+            this.changeState(adjacentMinesToState.get(this.adjacentMines));
         } else {
-            this.changeState("flag");
+            this.changeState(cubeStates.flag);
         }
 
         return true;
@@ -54,8 +45,7 @@ export class Cube {
         this.adjacentMines = numOfMines;
     }
 
-    changeState(state: string): void {
-        this.image = stateToImage.get(state);
+    changeState(state: cubeStates): void {
         this.state = state;
     }
 
@@ -64,18 +54,18 @@ export class Cube {
 
         this.opened = true;
         if (this.isBomb()) {
-            this.changeState("bomb");
+            this.changeState(cubeStates.bomb);
         } else {
-            this.changeState(this.adjacentMines.toString());
+            this.changeState(adjacentMinesToState.get(this.adjacentMines));
         }
     }
 
-    isOpened(): boolean {
+    isOpen(): boolean {
         return this.opened;
     }
 
-    isFlagged(): boolean {
-        return this.state === 'flag';
+    isFlag(): boolean {
+        return this.state === cubeStates.flag;
     }
 
     isBomb(): boolean {
