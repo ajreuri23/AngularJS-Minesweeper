@@ -1,5 +1,5 @@
 import { Cube } from './cube';
-import {stateToImage} from '../../models/imageToState';
+import {stateToImage} from '../../models/maps/stateToImage';
 
 export class cubeController implements ng.IComponentController {
     public cube: Cube;

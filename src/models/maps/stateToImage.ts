@@ -1,4 +1,4 @@
-import {cubeStates} from './States';
+import {cubeStates} from '../enums/States';
 
 export const stateToImage: Map<cubeStates,string> = new Map<cubeStates,string>();
 

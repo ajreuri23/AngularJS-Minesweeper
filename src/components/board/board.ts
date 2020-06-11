@@ -1,7 +1,7 @@
 import { Cube } from '../cube/cube';
-import { sizeToMines } from '../../models/sizeToMines';
-import { gameStates } from '../../models/gameStates';
-import { cubeStates } from '../../models/States';
+import { sizeToMines } from '../../models/maps/sizeToMines';
+import { gameStates } from '../../models/enums/gameStates';
+import { cubeStates } from '../../models/enums/States';
 
 export class Board {
     private cells: Cube[][];
@@ -15,7 +15,7 @@ export class Board {
     constructor(size: number) {
         this.cells = [];
         this.boardSize = size;
-        this.amountOfMines = sizeToMines.get(size.toString());
+        this.amountOfMines = sizeToMines.get(size);
         this.minesLeft = this.amountOfMines;
         this.flaggedCells = this.amountOfMines;
         this.openedCells = 0;

@@ -1,4 +1,4 @@
-import { Difficulties } from '../../models/Difficulties';
+import { Difficulties } from '../../models/enums/Difficulties';
 
 const difficulties = [{
     title: 'Easy',

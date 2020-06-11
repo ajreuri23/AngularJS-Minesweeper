@@ -1,4 +1,4 @@
-import { cubeStates } from "./States";
+import { cubeStates } from "../enums/States";
 
 export const adjacentMinesToState : Map<number, cubeStates> = new Map<number, cubeStates>();
 

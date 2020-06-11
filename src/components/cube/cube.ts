@@ -1,6 +1,6 @@
-import {cubeStates} from '../../models/States';
-import {stateToImage} from '../../models/imageToState';
-import { adjacentMinesToState } from '../../models/adjacentMinesToState';
+import {cubeStates} from '../../models/enums/States';
+import {stateToImage} from '../../models/maps/stateToImage';
+import { adjacentMinesToState } from '../../models/maps/adjacentMinesToState';
 
 export class Cube {
     private state: cubeStates;

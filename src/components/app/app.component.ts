@@ -1,10 +1,11 @@
-import {Difficulties} from '../../models/Difficulties';
+import {Difficulties} from '../../models/enums/Difficulties';
+import {difficultyToSize} from '../../models/maps/difficultyToSize'
 
 export class appController implements ng.IComponentController {
     public boardSize: number;
 
     $onInit() {
-        this.boardSize = Difficulties.Easy;
+        this.boardSize = difficultyToSize.get(Difficulties.Easy);
     }
 
     updateSize(size: number) {

@@ -1,8 +1,8 @@
 import { Cube } from '../components/cube/cube';
-import { gameStates } from '../models/gameStates';
+import { gameStates } from '../models/enums/gameStates';
 import { Board } from '../components/board/board';
-import { cubeStates } from '../models/States';
-import { adjacentMinesToState } from '../models/adjacentMinesToState';
+import { cubeStates } from '../models/enums/States';
+import { adjacentMinesToState } from '../models/maps/adjacentMinesToState';
 
 export class gameService {
     static initializeBoard(size:number): Board {

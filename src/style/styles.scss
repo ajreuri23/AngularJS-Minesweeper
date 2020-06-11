@@ -1,8 +1,8 @@
-@import './cube';
-@import './board';
+@import '../components/cube/cube';
+@import '../components/board/board';
 @import './resets';
-@import './navbar';
-@import './message';
+@import '../components/navbar/navbar';
+@import '../components/message/message';
 
 body, html {
   padding:0;
